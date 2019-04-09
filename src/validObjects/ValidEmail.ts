@@ -3,7 +3,7 @@ import { ValidObjectError } from '@/errors/ValidObjectError'
 import { ValidString } from '@/validObjects/ValidString'
 import { validate } from 'email-validator'
 
-export const validateEmail = (email: string | undefined, excludeChars: string[]): boolean => {
+export const validateEmail = (email: string | undefined, excludeChars?: string[]): boolean => {
   if (!email) {
     return false
   }
@@ -12,7 +12,7 @@ export const validateEmail = (email: string | undefined, excludeChars: string[])
     return false
   }
 
-  const foundChar = excludeChars.reduce((accumulator: boolean, currentValue: string): boolean => {
+  const foundChar = excludeChars && excludeChars.reduce((accumulator: boolean, currentValue: string): boolean => {
     if (accumulator) {
       return true
     }
@@ -32,7 +32,7 @@ export const validateEmail = (email: string | undefined, excludeChars: string[])
 
 export class ValidEmail extends ValidString {
   // tslint:disable-next-line:no-any
-  constructor(val: any, excludeChars: string[] = []) {
+  constructor(val: any, excludeChars?: string[]) {
     try {
       super(val)
     } catch (err) {
