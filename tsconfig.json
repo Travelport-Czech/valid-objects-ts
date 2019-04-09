@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "es6",
+    "sourceMap": true,
+    "strict": true,
+    "moduleResolution": "node",
+    "rootDirs": [
+      "./src"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "pretty": true,
+    "declaration": true,
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "removeComments": true,
+    "noImplicitReturns": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": ".dist"
+  },
+  "include": [
+    "./src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
+  ]
+}

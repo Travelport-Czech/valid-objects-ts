@@ -1,0 +1,40 @@
+{
+  "name": "valid-objects-ts",
+  "version": "1.0.0",
+  "main": ".dist/index.js",
+  "types": ".dist/index.d.ts",
+  "repository": "git@github.com:Travelport-Czech/valid-objects-ts.git",
+  "author": "Michal Bureš <michal.ezop@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "postinstall": "npm run build",
+    "lint": "tsc --project tsconfig.json && tslint --project tsconfig.json --config tslint.json",
+    "build": "tsc --project tsconfig.json",
+    "autofix": "prettier src/**/* --write --single-quote --no-semi --print-width 120 --end-of-line lf"
+  },
+  "dependencies": {
+    "@types/email-validator": "^1.0.6",
+    "@types/moment": "^2.13.0",
+    "@types/numeral": "^0.0.25",
+    "@types/valid-url": "^1.0.2",
+    "email-validator": "^2.0.4",
+    "extendable-error": "^0.1.5",
+    "moment": "^2.24.0",
+    "number-format.js": "^2.0.8",
+    "numeral": "^2.0.6",
+    "path-alias-resolver": "https://github.com/Travelport-Czech/path-alias-resolver.git#1.0.5",
+    "valid-url": "^1.0.9"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.0",
+    "prettier": "1.16.4",
+    "tslint": "5.15.0",
+    "tslint-config-prettier": "1.18.0",
+    "tslint-consistent-codestyle": "1.15.1",
+    "tslint-eslint-rules": "5.4.0",
+    "tslint-immutable": "5.5.2",
+    "tslint-microsoft-contrib": "6.1.0",
+    "tslint-plugin-prettier": "2.0.1",
+    "typescript": "^3.4.2"
+  }
+}
