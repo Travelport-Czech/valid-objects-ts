@@ -12,16 +12,18 @@ export const validateEmail = (email: string | undefined, excludeChars?: string[]
     return false
   }
 
-  const foundChar = excludeChars && excludeChars.reduce((accumulator: boolean, currentValue: string): boolean => {
-    if (accumulator) {
-      return true
-    }
-    if (email.includes(currentValue)) {
-      return true
-    }
+  const foundChar =
+    excludeChars &&
+    excludeChars.reduce((accumulator: boolean, currentValue: string): boolean => {
+      if (accumulator) {
+        return true
+      }
+      if (email.includes(currentValue)) {
+        return true
+      }
 
-    return false
-  }, false)
+      return false
+    }, false)
 
   if (foundChar) {
     return false

@@ -59,7 +59,7 @@ export class ValidDate {
   }
 
   public readonly subtractDays = (days: number): ValidDate => {
-     return new ValidDate(this.moment.subtract(days, 'days').format(formatSystemDate))
+    return new ValidDate(this.moment.subtract(days, 'days').format(formatSystemDate))
   }
 
   public readonly formatToSystem = (): string => {
