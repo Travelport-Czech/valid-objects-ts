@@ -1,0 +1,43 @@
+import { ValidPrice } from '@/validObjects/ValidPrice'
+import { expect } from 'chai'
+
+describe('ValidPrice', () => {
+  it('convert to JSON', () => {
+    const data = { price: new ValidPrice('200 000 CZK') }
+
+    expect(JSON.stringify(data)).to.eq('{"price":"200000 CZK"}')
+  })
+
+  it('constructor', () => {
+    const test = (val: string, amount: number, currency: string, formatted?: string) => {
+      const price = new ValidPrice(val)
+      expect(price.toString()).to.eq(amount.toString() + ' ' + currency)
+      expect(price.formatToLocale()).to.eq(formatted ? formatted : val)
+      expect(price.amount).to.eq(amount)
+      expect(price.currency).to.eq(currency)
+    }
+
+    const testError = (val: string, err: string) => {
+      expect(() => new ValidPrice(val)).to.throw(err)
+    }
+
+    test('1 CZK', 1, 'CZK')
+    test('12 CZK', 12, 'CZK')
+    test('123 CZK', 123, 'CZK')
+    test('1 234 CZK', 1234, 'CZK')
+    test('12 345 CZK', 12345, 'CZK')
+    test('123 456 CZK', 123456, 'CZK')
+    test('1 234 567 CZK', 1234567, 'CZK')
+    test('12 345 678 CZK', 12345678, 'CZK')
+    test('123 456 789 CZK', 123456789, 'CZK')
+
+    test('1  CZK', 1, 'CZK', '1 CZK')
+    test('1000 CZK', 1000, 'CZK', '1 000 CZK')
+
+    testError('', `Invalid price 'Invalid string ''.'.`)
+    testError('CZK', `Invalid price 'CZK'.`)
+    testError('1CZK', `Invalid price '1CZK'.`)
+    testError('1  000 CZK', `Invalid price '1  000 CZK'.`)
+    testError('1', `Invalid price '1'.`)
+  })
+})
