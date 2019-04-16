@@ -69,6 +69,14 @@ export class ValidDate {
     )
   }
 
+  public readonly addDays = (days: number): ValidDate => {
+    return new ValidDate(
+      this.moment()
+        .add(days, 'days')
+        .format(formatSystemDate)
+    )
+  }
+
   public readonly diffInDays = (date: ValidDate): number => {
     return this.moment().diff(date.moment(), 'days')
   }

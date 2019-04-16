@@ -33,4 +33,18 @@ describe('ValidDate', () => {
     const date4 = new ValidDate('2017-12-24')
     expect(date.diffInDays(date4)).to.equal(365)
   })
+
+  it('subtract days', () => {
+    const date = new ValidDate('2018-12-24')
+    expect(date.subtractDays(0).toString()).to.equal('2018-12-24')
+    expect(date.subtractDays(1).toString()).to.equal('2018-12-23')
+    expect(date.subtractDays(100).toString()).to.equal('2018-09-15')
+  })
+
+  it('add days', () => {
+    const date = new ValidDate('2018-12-24')
+    expect(date.addDays(0).toString()).to.equal('2018-12-24')
+    expect(date.addDays(1).toString()).to.equal('2018-12-25')
+    expect(date.addDays(100).toString()).to.equal('2019-04-03')
+  })
 })
