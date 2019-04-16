@@ -69,6 +69,10 @@ export class ValidDate {
     )
   }
 
+  public readonly diffInDays = (date: ValidDate): number => {
+    return this.moment().diff(date.moment(), 'days')
+  }
+
   public readonly formatToSystem = (): string => {
     return this.moment().format(formatSystemDate)
   }

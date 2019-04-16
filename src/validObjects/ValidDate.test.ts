@@ -17,4 +17,20 @@ describe('ValidDate', () => {
 
     expect(JSON.stringify(data)).to.eq('{"date":"2018-12-24"}')
   })
+
+  it('Diff in days', () => {
+    const date = new ValidDate('2018-12-24')
+
+    const date1 = new ValidDate('2018-12-24')
+    expect(date.diffInDays(date1)).to.equal(0)
+
+    const date2 = new ValidDate('2018-12-23')
+    expect(date.diffInDays(date2)).to.equal(1)
+
+    const date3 = new ValidDate('2018-12-25')
+    expect(date.diffInDays(date3)).to.equal(-1)
+
+    const date4 = new ValidDate('2017-12-24')
+    expect(date.diffInDays(date4)).to.equal(365)
+  })
 })
