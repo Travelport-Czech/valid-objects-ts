@@ -73,7 +73,7 @@ export class ValidPrice extends ValidString {
   }
 
   public toString() {
-    return format('#.', this.amount) + ' ' + this.currency
+    return format('0.', this.amount) + ' ' + this.currency
   }
 
   private checkCurrency(price: ValidPrice): void {

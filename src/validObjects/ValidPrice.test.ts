@@ -21,6 +21,7 @@ describe('ValidPrice', () => {
       expect(() => new ValidPrice(val)).to.throw(err)
     }
 
+    test('0 CZK', 0, 'CZK')
     test('1 CZK', 1, 'CZK')
     test('12 CZK', 12, 'CZK')
     test('123 CZK', 123, 'CZK')
