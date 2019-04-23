@@ -12,7 +12,7 @@ describe('ValidPrice', () => {
     const test = (val: string, amount: number, currency: string, formatted?: string) => {
       const price = new ValidPrice(val)
       expect(price.toString()).to.eq(amount.toString() + ' ' + currency)
-      expect(price.formatToLocale()).to.eq(formatted ? formatted : val)
+      expect(price.formatToLocale('# ##0. ¤')).to.eq(formatted ? formatted : val)
       expect(price.amount).to.eq(amount)
       expect(price.currency).to.eq(currency)
     }
@@ -35,10 +35,12 @@ describe('ValidPrice', () => {
     test('1  CZK', 1, 'CZK', '1 CZK')
     test('1000 CZK', 1000, 'CZK', '1 000 CZK')
 
+    test('1 000 Kč CZK', 1000, 'CZK', '1 000 CZK')
+    test('£1,000 CZK', 1000, 'CZK', '1 000 CZK')
+
     testError('', `Invalid price 'Invalid string ''.'.`)
     testError('CZK', `Invalid price 'CZK'.`)
     testError('1CZK', `Invalid price '1CZK'.`)
-    testError('1  000 CZK', `Invalid price '1  000 CZK'.`)
     testError('1', `Invalid price '1'.`)
   })
 })

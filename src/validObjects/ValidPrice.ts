@@ -3,10 +3,10 @@ import { PriceOperationWithDifferentCurrencyError } from '@/errors/PriceOperatio
 import { ValidObjectError } from '@/errors/ValidObjectError'
 import { ValidNumber } from '@/validObjects/ValidNumber'
 import { ValidString } from '@/validObjects/ValidString'
-import * as format from 'number-format.js'
+import * as formatter from 'number-format.js'
 import * as numeral from 'numeral'
 
-const inputRegexp = new RegExp(/^([0-9]{1,3}\s?)*\s([A-Z]{3})$/)
+const inputRegexp = new RegExp(/^(.)*\s([A-Z]{3})$/)
 
 const validate = (val: string): void => {
   if (!inputRegexp.test(val)) {
@@ -18,8 +18,15 @@ export class ValidPrice extends ValidString {
   private readonly amm: ValidNumber
   private readonly curr: ValidString
 
-  // tslint:disable-next-line:no-any
-  constructor(val: any) {
+  /**
+   * Value must contain:
+   * 1. number (can be formatted with currency symbol)
+   * 2. space
+   * 3. currency code (three chars)
+   *
+   * Decimal numbers are not supported
+   */
+  constructor(val: unknown) {
     try {
       super(val)
       validate(this.value)
@@ -68,12 +75,20 @@ export class ValidPrice extends ValidString {
     return Math.round((diff / this.amount) * 100)
   }
 
-  public formatToLocale() {
-    return format('### ###.', this.amount) + ' ' + this.currency
+  /**
+   * use number format from number-format.js (https://github.com/Mottie/javascript-number-formatter)
+   * for currency use symbol ¤
+   *
+   * example:
+   * CZ: # ##0,## ¤
+   * UK: ¤#,##0.00
+   */
+  public formatToLocale(format: string) {
+    return formatter(format.replace('¤', this.currency), this.amount)
   }
 
   public toString() {
-    return format('0.', this.amount) + ' ' + this.currency
+    return formatter('0.', this.amount) + ' ' + this.currency
   }
 
   private checkCurrency(price: ValidPrice): void {
