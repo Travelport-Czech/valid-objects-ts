@@ -22,12 +22,11 @@
     "forceConsistentCasingInFileNames": true,
     "outDir": ".dist"
   },
-  "include": [
-    "./src/**/*"
+  "files": [
+    "src/index.ts"
   ],
   "exclude": [
     "node_modules",
-    "**/*.spec.ts",
-    "./src/**/*.test.ts"
+    "src/**/*.test.ts"
   ]
 }
