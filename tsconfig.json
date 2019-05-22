@@ -23,10 +23,12 @@
     "outDir": ".dist"
   },
   "files": [
-    "src/index.ts"
+    "src/index.ts",
+    "src/errors/*.ts",
+    "src/validObjects/*.ts"
   ],
   "exclude": [
     "node_modules",
-    "src/**/*.test.ts"
+    "src/tests"
   ]
 }

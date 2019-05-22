@@ -1,4 +1,4 @@
-import { ValidDate } from '@/validObjects/ValidDate'
+import { ValidDate } from 'src/validObjects/ValidDate'
 import { expect } from 'chai'
 
 describe('ValidDate', () => {

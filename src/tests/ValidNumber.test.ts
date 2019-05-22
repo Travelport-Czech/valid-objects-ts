@@ -1,4 +1,4 @@
-import { ValidNumber } from '@/validObjects/ValidNumber'
+import { ValidNumber } from 'src/validObjects/ValidNumber'
 import { expect } from 'chai'
 
 describe('ValidNumber', () => {
