@@ -1,4 +1,5 @@
 import { InvalidNumberError } from '@/errors/InvalidNumberError'
+import { ValidObjectLogicError } from '@/errors/ValidObjectLogicError'
 
 // tslint:disable-next-line:no-any
 const validate = (val: any): number => {
@@ -16,8 +17,17 @@ export class ValidNumber {
   private readonly val: number
 
   // tslint:disable-next-line:no-any
-  constructor(val: any) {
+  constructor(val: any, rangeFromInclusive?: number, rangeToInclusive?: number) {
+    if (rangeFromInclusive !== undefined && rangeToInclusive !== undefined && rangeFromInclusive > rangeToInclusive) {
+      throw new ValidObjectLogicError(`Parameter rangeFromInclusive (${rangeFromInclusive}) can not be bigger then rangeToInclusive (${rangeToInclusive})`)
+    }
     this.val = validate(val)
+    if (rangeFromInclusive && this.value < rangeFromInclusive) {
+      throw new InvalidNumberError(`Number (${this.value}) can not be smaller than ${rangeFromInclusive}`)
+    }
+    if (rangeToInclusive && this.value > rangeToInclusive) {
+      throw new InvalidNumberError(`Number (${this.value}) can not be bigger than ${rangeToInclusive}`)
+    }
   }
 
   get value(): number {
