@@ -1,3 +1,4 @@
+export * from '@/validObjects/ValidBoolean'
 export * from '@/validObjects/ValidDate'
 export * from '@/validObjects/ValidDateTime'
 export * from '@/validObjects/ValidEmail'
@@ -9,6 +10,7 @@ export * from '@/validObjects/ValidLanguage'
 export * from '@/validObjects/ValidIATALocation'
 export * from '@/validObjects/ValidIATALocationList'
 
+export * from '@/errors/InvalidBooleanError'
 export * from '@/errors/InvalidDateError'
 export * from '@/errors/InvalidDateTimeError'
 export * from '@/errors/InvalidEmailError'

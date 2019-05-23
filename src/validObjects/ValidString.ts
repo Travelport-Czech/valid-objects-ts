@@ -1,7 +1,6 @@
 import { InvalidStringError } from '@/errors/InvalidStringError'
 
-// tslint:disable-next-line:no-any
-const validate = (val: any): string => {
+const validate = (val: unknown): string => {
   if (typeof val !== 'string') {
     throw new InvalidStringError(JSON.stringify(val) + ' is type ' + typeof val)
   }
@@ -15,8 +14,7 @@ const validate = (val: any): string => {
 export class ValidString {
   private readonly val: string
 
-  // tslint:disable-next-line:no-any
-  constructor(val: any) {
+  constructor(val: unknown) {
     this.val = validate(val)
   }
 
