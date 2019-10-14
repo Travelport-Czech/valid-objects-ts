@@ -1,9 +1,12 @@
 {
-  "name": "@travelport-czech/valid-objects-ts",
+  "name": "@ceesystems/valid-objects-ts",
   "version": "1.0.12",
   "main": ".dist/index.js",
   "types": ".dist/index.d.ts",
-  "repository": "git@github.com:Travelport-Czech/valid-objects-ts.git",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Travelport-Czech/valid-objects-ts.git"
+  },
   "author": "Michal Bureš <michal.ezop@gmail.com>",
   "license": "MIT",
   "scripts": {
@@ -41,5 +44,10 @@
     "tslint-microsoft-contrib": "6.1.0",
     "tslint-plugin-prettier": "2.0.1",
     "typescript": "3.4.5"
-  }
+  },
+  "description": "Valid object improving application data management and make them more safe.",
+  "bugs": {
+    "url": "https://github.com/Travelport-Czech/valid-objects-ts/issues"
+  },
+  "homepage": "https://github.com/Travelport-Czech/valid-objects-ts#readme"
 }
