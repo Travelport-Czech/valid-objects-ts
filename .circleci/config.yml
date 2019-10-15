@@ -23,5 +23,5 @@ jobs:
           paths:
             - .npm-cache
           key: npm-cache
-      - run: npm lint
+      - run: npm run lint
       - run: npm test
