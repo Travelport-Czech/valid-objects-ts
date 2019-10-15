@@ -1,5 +1,5 @@
 import { InvalidDateError } from '@/errors/InvalidDateError'
-import * as moment from 'moment'
+import * as dayjs from 'dayjs'
 
 const dateRegexps = {
   'YYYY-MM-DD': /^([0-9]{4})-([0-9]{2})-([0-9]{2})$/,
@@ -7,8 +7,7 @@ const dateRegexps = {
 }
 export const formatSystemDate = 'YYYY-MM-DD'
 
-// tslint:disable-next-line:no-any
-const validate = (val: any, format: 'YYYY-MM-DD' | 'YYYYMMDD'): string => {
+const validate = (val: unknown, format: 'YYYY-MM-DD' | 'YYYYMMDD'): dayjs.Dayjs => {
   if (typeof val !== 'string') {
     throw new InvalidDateError(JSON.stringify(val))
   }
@@ -20,73 +19,56 @@ const validate = (val: any, format: 'YYYY-MM-DD' | 'YYYYMMDD'): string => {
     throw new InvalidDateError(val)
   }
 
-  return val.replace(dateRegexps[format], '$1-$2-$3')
-}
-
-const convertToMoment = (val: string): moment.Moment => {
-  const momentVal = moment(val, formatSystemDate)
-  if (!momentVal.isValid()) {
+  const date = dayjs(val, formatSystemDate)
+  if (!date.isValid()) {
     throw new InvalidDateError(val)
   }
 
-  return momentVal
+  return date
 }
 
 export class ValidDate {
-  private readonly val: string
+  private readonly val: dayjs.Dayjs
 
   // tslint:disable-next-line:no-any
-  constructor(val: any, format: 'YYYY-MM-DD' | 'YYYYMMDD' = formatSystemDate) {
+  constructor(val: unknown, format: 'YYYY-MM-DD' | 'YYYYMMDD' = formatSystemDate) {
     this.val = validate(val, format)
-    convertToMoment(this.val)
   }
 
-  get value(): string {
+  get value(): dayjs.Dayjs {
     return this.val
   }
 
-  public readonly moment = (): moment.Moment => {
-    return convertToMoment(this.val)
-  }
-
   public readonly isBefore = (date: ValidDate): boolean => {
-    return this.moment().isBefore(date.value)
+    return this.val.isBefore(date.value)
   }
 
   public readonly isAfter = (date: ValidDate): boolean => {
-    return this.moment().isAfter(date.value)
+    return this.val.isAfter(date.value)
   }
 
   public readonly isSame = (date: ValidDate): boolean => {
-    return this.moment().isSame(date.value)
+    return this.val.isSame(date.value)
   }
 
   public readonly subtractDays = (days: number): ValidDate => {
-    return new ValidDate(
-      this.moment()
-        .subtract(days, 'days')
-        .format(formatSystemDate)
-    )
+    return new ValidDate(this.val.subtract(days, 'day').format(formatSystemDate))
   }
 
   public readonly addDays = (days: number): ValidDate => {
-    return new ValidDate(
-      this.moment()
-        .add(days, 'days')
-        .format(formatSystemDate)
-    )
+    return new ValidDate(this.val.add(days, 'day').format(formatSystemDate))
   }
 
   public readonly diffInDays = (date: ValidDate): number => {
-    return this.moment().diff(date.moment(), 'days')
+    return this.val.diff(date.value, 'day')
   }
 
   public readonly formatToSystem = (): string => {
-    return this.moment().format(formatSystemDate)
+    return this.val.format(formatSystemDate)
   }
 
   public readonly formatToLocal = (format: string): string => {
-    return this.moment().format(format)
+    return this.val.format(format)
   }
 
   public toString() {

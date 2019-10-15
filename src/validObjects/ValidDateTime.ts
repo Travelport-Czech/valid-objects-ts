@@ -1,12 +1,11 @@
 import { InvalidDateTimeError } from '@/errors/InvalidDateTimeError'
 import { ValidDate } from '@/validObjects/ValidDate'
-import * as moment from 'moment'
+import * as dayjs from 'dayjs'
 
 const dateRegexp = /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}$/
 export const formatSystemDateTime = 'YYYY-MM-DD HH:mm:ss'
 
-// tslint:disable-next-line:no-any
-const validate = (val: any): string => {
+const validate = (val: unknown): dayjs.Dayjs => {
   if (typeof val !== 'string') {
     throw new InvalidDateTimeError(JSON.stringify(val))
   }
@@ -14,49 +13,39 @@ const validate = (val: any): string => {
     throw new InvalidDateTimeError(val)
   }
 
-  return val
-}
-
-const convertToMoment = (val: string): moment.Moment => {
   const result = val.match(dateRegexp)
   if (!result) {
     throw new InvalidDateTimeError(val)
   }
-  const momentVal = moment(val, formatSystemDateTime)
-  if (!momentVal.isValid()) {
+  const dateTime = dayjs(val, formatSystemDateTime)
+  if (!dateTime.isValid()) {
     throw new InvalidDateTimeError(val)
   }
 
-  return momentVal
+  return dateTime
 }
 
 export class ValidDateTime {
-  private readonly val: string
+  private readonly val: dayjs.Dayjs
 
-  // tslint:disable-next-line:no-any
-  constructor(val: any) {
+  constructor(val: unknown) {
     this.val = validate(val)
-    convertToMoment(this.val)
   }
 
-  get value(): string {
+  get value(): dayjs.Dayjs {
     return this.val
   }
 
-  get moment(): moment.Moment {
-    return convertToMoment(this.val)
-  }
-
   public readonly formatToSystem = (): string => {
-    return this.moment.format(formatSystemDateTime)
+    return this.val.format(formatSystemDateTime)
   }
 
-  public readonly formatToSystemDate = (): string => {
-    return this.moment.format(formatSystemDateTime)
+  public readonly formatToLocal = (format: string): string => {
+    return this.val.format(format)
   }
 
   public readonly getValidDate = (): ValidDate => {
-    return new ValidDate(this.formatToSystemDate().substring(0, 10))
+    return new ValidDate(this.formatToSystem().substring(0, 10))
   }
 
   public toString() {

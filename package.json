@@ -3,7 +3,9 @@
   "version": "1.0.15",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": ["dist/**/*"],
+  "files": [
+    "dist/**/*"
+  ],
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/Travelport-Czech/valid-objects-ts.git"
@@ -20,9 +22,9 @@
   "dependencies": {
     "@types/numeral": "^0.0.25",
     "@types/valid-url": "^1.0.2",
+    "dayjs": "^1.8.16",
     "email-validator": "^2.0.4",
     "extendable-error": "^0.1.5",
-    "moment": "^2.24.0",
     "number-format.js": "^2.0.8",
     "numeral": "^2.0.6",
     "valid-url": "^1.0.9"
