@@ -1,8 +1,9 @@
 {
   "name": "@ceesystems/valid-objects-ts",
   "version": "1.0.14",
-  "main": ".dist/index.js",
-  "types": ".dist/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist/**/*"],
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/Travelport-Czech/valid-objects-ts.git"
@@ -10,7 +11,7 @@
   "author": "Michal Bureš <michal.ezop@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "prepublish": "npm run build",
+    "prepublishOnly": "npm run build",
     "lint": "tsc --project tsconfig.json && tslint --project tsconfig.json --config tslint.json",
     "build": "tsc --project tsconfig.json && gulp --gulpfile gulpfile.js",
     "autofix": "prettier src/**/* --write --single-quote --no-semi --print-width 120 --end-of-line lf",

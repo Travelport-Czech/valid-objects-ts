@@ -1,10 +1,8 @@
 # package directories
 node_modules
-
 # ide
 .idea
-
 # build directory
-.dist
+dist
 
 
