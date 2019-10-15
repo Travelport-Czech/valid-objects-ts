@@ -20,7 +20,7 @@
     "noImplicitReturns": true,
     "suppressImplicitAnyIndexErrors": true,
     "forceConsistentCasingInFileNames": true,
-    "outDir": ".dist"
+    "outDir": "dist"
   },
   "include": [
     "src/index.ts",
