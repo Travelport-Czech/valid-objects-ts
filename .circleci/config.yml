@@ -17,7 +17,7 @@ jobs:
             - npm-cache
             # fallback to using the latest cache if no exact match is found
             - npm-cache
-      - run: npm config set cache "$(pwd)/.npm-cache" --global
+      - run: sudo npm config set cache "$(pwd)/.npm-cache" --global
       - run: npm ci
       - save_cache:
           paths:
