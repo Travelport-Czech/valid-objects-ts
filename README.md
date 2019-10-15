@@ -1,3 +1,4 @@
+![CircleCI](https://img.shields.io/circleci/build/gh/Travelport-Czech/valid-objects-ts)
 ![npm (scoped)](https://img.shields.io/npm/v/@ceesystems/valid-objects-ts)
 ![npm bundle size (scoped)](https://img.shields.io/bundlephobia/min/@ceesystems/valid-objects-ts)
 
