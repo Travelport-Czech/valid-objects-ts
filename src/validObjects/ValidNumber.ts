@@ -19,7 +19,9 @@ export class ValidNumber {
   // tslint:disable-next-line:no-any
   constructor(val: any, rangeFromInclusive?: number, rangeToInclusive?: number) {
     if (rangeFromInclusive !== undefined && rangeToInclusive !== undefined && rangeFromInclusive > rangeToInclusive) {
-      throw new ValidObjectLogicError(`Parameter rangeFromInclusive (${rangeFromInclusive}) can not be bigger then rangeToInclusive (${rangeToInclusive})`)
+      throw new ValidObjectLogicError(
+        `Parameter rangeFromInclusive (${rangeFromInclusive}) can not be bigger then rangeToInclusive (${rangeToInclusive})`
+      )
     }
     this.val = validate(val)
     if (rangeFromInclusive && this.value < rangeFromInclusive) {
