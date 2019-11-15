@@ -1,7 +1,7 @@
 {
   "name": "@ceesystems/valid-objects-ts",
-  "version": "1.0.17",
-  "publishConfig": { 
+  "version": "1.0.18",
+  "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
   },
   "main": "dist/index.js",
