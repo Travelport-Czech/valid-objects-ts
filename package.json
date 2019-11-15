@@ -1,5 +1,5 @@
 {
-  "name": "@ceesystems/valid-objects-ts",
+  "name": "@travelport-czech/valid-objects-ts",
   "version": "1.0.18",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
