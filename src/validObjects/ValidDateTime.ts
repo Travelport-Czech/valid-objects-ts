@@ -1,9 +1,7 @@
 import { InvalidDateTimeError } from '@/errors/InvalidDateTimeError'
+import { dateTimeRegexp, formatSystemDateTime } from '@/validObjects/consts'
 import { ValidDate } from '@/validObjects/ValidDate'
 import * as dayjs from 'dayjs'
-
-const dateRegexp = /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}$/
-export const formatSystemDateTime = 'YYYY-MM-DD HH:mm:ss'
 
 const validate = (val: unknown): dayjs.Dayjs => {
   if (typeof val !== 'string') {
@@ -13,7 +11,7 @@ const validate = (val: unknown): dayjs.Dayjs => {
     throw new InvalidDateTimeError(val)
   }
 
-  const result = val.match(dateRegexp)
+  const result = val.match(dateTimeRegexp)
   if (!result) {
     throw new InvalidDateTimeError(val)
   }

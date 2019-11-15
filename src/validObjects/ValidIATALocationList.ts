@@ -1,12 +1,11 @@
 import { InvalidIATALocationError } from '@/errors/InvalidIATALocationError'
 import { ValidObjectError } from '@/errors/ValidObjectError'
+import { iataLocationsRegexp } from '@/validObjects/consts'
 import { ValidIATALocation } from '@/validObjects/ValidIATALocation'
 import { ValidString } from '@/validObjects/ValidString'
 
-const inputRegexp = new RegExp(/^[A-Z]{3}(\/[A-Z]{3})*$/)
-
 const validate = (val: string): string => {
-  if (!inputRegexp.test(val)) {
+  if (!iataLocationsRegexp.test(val)) {
     throw new InvalidIATALocationError(val)
   }
 

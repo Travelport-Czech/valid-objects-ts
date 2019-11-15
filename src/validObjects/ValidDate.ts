@@ -1,11 +1,6 @@
 import { InvalidDateError } from '@/errors/InvalidDateError'
+import { dateRegexps, formatSystemDate } from '@/validObjects/consts'
 import * as dayjs from 'dayjs'
-
-const dateRegexps = {
-  'YYYY-MM-DD': /^([0-9]{4})-([0-9]{2})-([0-9]{2})$/,
-  YYYYMMDD: /^([0-9]{4})([0-9]{2})([0-9]{2})$/
-}
-export const formatSystemDate = 'YYYY-MM-DD'
 
 const validate = (val: unknown, format: 'YYYY-MM-DD' | 'YYYYMMDD'): dayjs.Dayjs => {
   if (typeof val !== 'string') {
