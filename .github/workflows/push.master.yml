@@ -24,18 +24,21 @@ jobs:
       - name: "Automated Version Bump"
         uses: "phips28/gh-action-bump-version@master"
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - name: "cat package.json"
         run: cat ./package.json
 
-  publish:
+  publish-npm:
+    needs: bump-version
     runs-on: ubuntu-latest
-    name: "Publish release"
     steps:
-      - uses: actions/checkout@master
-      - name: Create a Release
-        uses: elgohr/Github-Release-Action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
         with:
-          args: New version
+          node-version: 12
+          registry-url: https://npm.pkg.github.com/
+          scope: '@travelport-czech'
+      - run: npm ci
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
