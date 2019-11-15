@@ -1,6 +1,6 @@
 import { InvalidDateError } from '@/errors/InvalidDateError'
+import { dateRegexps, formatSystemDate } from '@/validObjects/consts'
 import * as dayjs from 'dayjs'
-import { dateRegexps, formatSystemDate } from './consts'
 
 const validate = (val: unknown, format: 'YYYY-MM-DD' | 'YYYYMMDD'): dayjs.Dayjs => {
   if (typeof val !== 'string') {

@@ -1,8 +1,8 @@
 import { InvalidIATALocationError } from '@/errors/InvalidIATALocationError'
 import { ValidObjectError } from '@/errors/ValidObjectError'
+import { iataLocationsRegexp } from '@/validObjects/consts'
 import { ValidIATALocation } from '@/validObjects/ValidIATALocation'
 import { ValidString } from '@/validObjects/ValidString'
-import { iataLocationsRegexp } from './consts'
 
 const validate = (val: string): string => {
   if (!iataLocationsRegexp.test(val)) {
