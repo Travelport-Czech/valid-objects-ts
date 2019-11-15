@@ -15,8 +15,9 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-      run: npm ci
-      run: npm test
+      run: |
+        npm ci
+        npm test
       env:
         CI: true
   
@@ -27,8 +28,9 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: 12
-      run: npm ci
-      run: npm build
+      run: |
+        npm ci
+        npm build
 
   publish-npm:
     needs: build
@@ -39,8 +41,9 @@ jobs:
       with:
         node-version: 12
         registry-url: https://registry.npmjs.org/
-      run: npm ci
-      run: npm build
-      run: npm publish
+      run: |
+        npm ci
+        npm build
+        npm publish
       env:
         NODE_AUTH_TOKEN: ${{secrets.npm_token}}
