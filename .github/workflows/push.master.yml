@@ -16,9 +16,10 @@ jobs:
           registry-url: https://npm.pkg.github.com/
           scope: '@travelport-czech'
       - name: "Test"
-        run: npm ci
-        run: npm run lint
-        run: npm test
+        run: |
+          npm ci
+          npm run lint
+          npm test
       - name: "Automated Version Bump"
         uses: "phips28/gh-action-bump-version@master"
         env:
