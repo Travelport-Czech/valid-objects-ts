@@ -15,22 +15,10 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - name: Run lint and tests
-      run: |
+    - run: |
         npm ci
         npm run lint
         npm test
+        npm build
       env:
         CI: true
-  
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v1
-    - name: Build
-      uses: actions/setup-node@v1
-      with:
-        node-version: 12
-    - name: Run build
-      run: |
-        npm ci
-        npm build
