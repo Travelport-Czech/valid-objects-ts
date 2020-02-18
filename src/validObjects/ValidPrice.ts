@@ -31,7 +31,7 @@ export class ValidPrice extends ValidString {
       super(val)
       validate(this.value)
 
-      this.amm = new ValidNumber(numeral(this.value).value())
+      this.amm = new ValidNumber(numeral(this.value.substring(0, this.value.length - 4)).value())
       this.curr = new ValidString(this.value.slice(-3))
     } catch (err) {
       if (!(err instanceof ValidObjectError)) {

@@ -38,6 +38,8 @@ describe('ValidPrice', () => {
     test('1 000 Kč CZK', 1000, 'CZK', '1 000 CZK')
     test('£1,000 CZK', 1000, 'CZK', '1 000 CZK')
 
+    test('11 080 ETB', 11080, 'ETB', '11 080 ETB')
+
     testError('', `Invalid price 'Invalid string ''.'.`)
     testError('CZK', `Invalid price 'CZK'.`)
     testError('1CZK', `Invalid price '1CZK'.`)
