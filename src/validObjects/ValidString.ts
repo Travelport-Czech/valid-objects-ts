@@ -1,21 +1,14 @@
 import { InvalidStringError } from '@/errors/InvalidStringError'
 
-const validate = (val: unknown): string => {
-  if (typeof val !== 'string') {
-    throw new InvalidStringError(JSON.stringify(val) + ' is type ' + typeof val)
-  }
-  if (!val) {
-    throw new InvalidStringError(val)
-  }
-
-  return val
-}
-
 export class ValidString {
   private readonly val: string
 
   constructor(val: unknown) {
-    this.val = validate(val)
+    if (typeof val !== 'string') {
+      throw new InvalidStringError(JSON.stringify(val) + ' is type ' + typeof val)
+    }
+
+    this.val = val
   }
 
   get value(): string {

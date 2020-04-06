@@ -1,8 +1,8 @@
 import { InvalidPriceError } from '@/errors/InvalidPriceError'
 import { PriceOperationWithDifferentCurrencyError } from '@/errors/PriceOperationWithDifferentCurrencyError'
 import { ValidObjectError } from '@/errors/ValidObjectError'
+import { ValidNotEmptyString } from '@/validObjects/ValidNotEmptyString'
 import { ValidNumber } from '@/validObjects/ValidNumber'
-import { ValidString } from '@/validObjects/ValidString'
 import * as formatter from 'number-format.js'
 import * as numeral from 'numeral'
 
@@ -14,9 +14,9 @@ const validate = (val: string): void => {
   }
 }
 
-export class ValidPrice extends ValidString {
+export class ValidPrice extends ValidNotEmptyString {
   private readonly amm: ValidNumber
-  private readonly curr: ValidString
+  private readonly curr: ValidNotEmptyString
 
   /**
    * Value must contain:
@@ -32,7 +32,7 @@ export class ValidPrice extends ValidString {
       validate(this.value)
 
       this.amm = new ValidNumber(numeral(this.value.substring(0, this.value.length - 4)).value())
-      this.curr = new ValidString(this.value.slice(-3))
+      this.curr = new ValidNotEmptyString(this.value.slice(-3))
     } catch (err) {
       if (!(err instanceof ValidObjectError)) {
         throw err

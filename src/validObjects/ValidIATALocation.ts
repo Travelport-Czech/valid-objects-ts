@@ -1,6 +1,6 @@
 import { InvalidIATALocationError } from '@/errors/InvalidIATALocationError'
 import { ValidObjectError } from '@/errors/ValidObjectError'
-import { ValidString } from '@/validObjects/ValidString'
+import { ValidNotEmptyString } from '@/validObjects/ValidNotEmptyString'
 
 const inputRegexp = new RegExp(/^[A-Z]{3}$/)
 
@@ -10,7 +10,7 @@ const validate = (val: string): void => {
   }
 }
 
-export class ValidIATALocation extends ValidString {
+export class ValidIATALocation extends ValidNotEmptyString {
   // tslint:disable-next-line:no-any
   constructor(val: any) {
     try {

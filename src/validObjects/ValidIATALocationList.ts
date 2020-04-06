@@ -2,7 +2,7 @@ import { InvalidIATALocationError } from '@/errors/InvalidIATALocationError'
 import { ValidObjectError } from '@/errors/ValidObjectError'
 import { iataLocationsRegexp } from '@/validObjects/consts'
 import { ValidIATALocation } from '@/validObjects/ValidIATALocation'
-import { ValidString } from '@/validObjects/ValidString'
+import { ValidNotEmptyString } from '@/validObjects/ValidNotEmptyString'
 
 const validate = (val: string): string => {
   if (!iataLocationsRegexp.test(val)) {
@@ -12,7 +12,7 @@ const validate = (val: string): string => {
   return val
 }
 
-export class ValidIATALocationList extends ValidString {
+export class ValidIATALocationList extends ValidNotEmptyString {
   private readonly locationCodes: ValidIATALocation[]
 
   // tslint:disable-next-line:no-any

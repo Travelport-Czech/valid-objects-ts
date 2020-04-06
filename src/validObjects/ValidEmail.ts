@@ -1,6 +1,6 @@
 import { InvalidEmailError } from '@/errors/InvalidEmailError'
 import { ValidObjectError } from '@/errors/ValidObjectError'
-import { ValidString } from '@/validObjects/ValidString'
+import { ValidNotEmptyString } from '@/validObjects/ValidNotEmptyString'
 import { validate } from 'email-validator'
 
 export const validateEmail = (email: string | undefined, excludeChars?: string[]): boolean => {
@@ -32,7 +32,7 @@ export const validateEmail = (email: string | undefined, excludeChars?: string[]
   return true
 }
 
-export class ValidEmail extends ValidString {
+export class ValidEmail extends ValidNotEmptyString {
   // tslint:disable-next-line:no-any
   constructor(val: any, excludeChars?: string[]) {
     try {

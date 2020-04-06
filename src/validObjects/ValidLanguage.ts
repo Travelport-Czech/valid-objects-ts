@@ -1,6 +1,6 @@
 import { InvalidLanguageError } from '@/errors/InvalidLanguageError'
 import { ValidObjectError } from '@/errors/ValidObjectError'
-import { ValidString } from '@/validObjects/ValidString'
+import { ValidNotEmptyString } from '@/validObjects/ValidNotEmptyString'
 
 const validate = (lang: string, supportedLanguages: string[]): void => {
   if (!supportedLanguages.includes(lang)) {
@@ -8,7 +8,7 @@ const validate = (lang: string, supportedLanguages: string[]): void => {
   }
 }
 
-export class ValidLanguage extends ValidString {
+export class ValidLanguage extends ValidNotEmptyString {
   // tslint:disable-next-line:no-any
   constructor(val: any, supportedLanguages: string[]) {
     try {

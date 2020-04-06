@@ -1,6 +1,6 @@
 import { InvalidUrlError } from '@/errors/InvalidUrlError'
 import { ValidObjectError } from '@/errors/ValidObjectError'
-import { ValidString } from '@/validObjects/ValidString'
+import { ValidNotEmptyString } from '@/validObjects/ValidNotEmptyString'
 import { isWebUri } from 'valid-url'
 
 const validate = (val: string): string => {
@@ -11,7 +11,7 @@ const validate = (val: string): string => {
   return val
 }
 
-export class ValidUrl extends ValidString {
+export class ValidUrl extends ValidNotEmptyString {
   // tslint:disable-next-line:no-any
   constructor(val: any) {
     try {
