@@ -1,45 +1,39 @@
-import { InvalidDateTimeError } from '@/errors/InvalidDateTimeError'
 import { dateTimeRegexp, formatSystemDateTime } from '@/validObjects/consts'
 import { ValidDate } from '@/validObjects/ValidDate'
+import { ValidNotEmptyString } from '@/validObjects/ValidNotEmptyString'
 import * as dayjs from 'dayjs'
 
-const validate = (val: unknown): dayjs.Dayjs => {
-  if (typeof val !== 'string') {
-    throw new InvalidDateTimeError(JSON.stringify(val))
-  }
-  if (!val) {
-    throw new InvalidDateTimeError(val)
-  }
-
+const validate = (val: string, name: string): dayjs.Dayjs => {
   const result = val.match(dateTimeRegexp)
   if (!result) {
-    throw new InvalidDateTimeError(val)
+    throw new Error(`Attribute ${name} is not valid DateTime: '${val}'.`)
   }
   const dateTime = dayjs(val, formatSystemDateTime)
   if (!dateTime.isValid()) {
-    throw new InvalidDateTimeError(val)
+    throw new Error(`Attribute ${name} is not valid DateTime: '${val}'.`)
   }
 
   return dateTime
 }
 
-export class ValidDateTime {
-  private readonly val: dayjs.Dayjs
+export class ValidDateTime extends ValidNotEmptyString {
+  private readonly dateTime: dayjs.Dayjs
 
-  constructor(val: unknown) {
-    this.val = validate(val)
+  constructor(val: unknown, name: string = 'DateTime') {
+    super(val, name)
+    this.dateTime = validate(this.getString(), name)
   }
 
-  get value(): dayjs.Dayjs {
-    return this.val
+  public getDayjs(): dayjs.Dayjs {
+    return this.dateTime
   }
 
   public readonly formatToSystem = (): string => {
-    return this.val.format(formatSystemDateTime)
+    return this.dateTime.format(formatSystemDateTime)
   }
 
   public readonly formatToLocal = (format: string): string => {
-    return this.val.format(format)
+    return this.dateTime.format(format)
   }
 
   public readonly getValidDate = (): ValidDate => {

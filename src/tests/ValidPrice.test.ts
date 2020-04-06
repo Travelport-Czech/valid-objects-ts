@@ -40,9 +40,9 @@ describe('ValidPrice', () => {
 
     test('11 080 ETB', 11080, 'ETB', '11 080 ETB')
 
-    testError('', `Invalid string 'String can not be empty.'.'`)
-    testError('CZK', `Invalid price 'CZK'.`)
-    testError('1CZK', `Invalid price '1CZK'.`)
-    testError('1', `Invalid price '1'.`)
+    testError('', `Attribute Price can not be empty.`)
+    testError('CZK', `Attribute Price is not valid price: 'CZK'.`)
+    testError('1CZK', `Attribute Price is not valid price: '1CZK'.`)
+    testError('1', `Attribute Price is not valid price: '1'.`)
   })
 })

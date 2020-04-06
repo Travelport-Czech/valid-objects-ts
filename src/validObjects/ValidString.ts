@@ -1,17 +1,15 @@
-import { InvalidStringError } from '@/errors/InvalidStringError'
-
 export class ValidString {
   private readonly val: string
 
-  constructor(val: unknown) {
+  constructor(val: unknown, name: string = 'String') {
     if (typeof val !== 'string') {
-      throw new InvalidStringError(JSON.stringify(val) + ' is type ' + typeof val)
+      throw new Error(`Attribute ${name} is not string.`)
     }
 
     this.val = val
   }
 
-  get value(): string {
+  public getString(): string {
     return this.val
   }
 

@@ -15,9 +15,9 @@ describe('ValidEmail', () => {
     test('test@test.cz')
     test('test{@test.cz')
 
-    testError('m', `Invalid email 'm'.`)
-    testError('m@', `Invalid email 'm@'.`)
-    testError('@m', `Invalid email '@m'.`)
-    testError('@m.cz', `Invalid email '@m.cz'.`)
+    testError('m', `Attribute Email is not valid Email: 'm'.`)
+    testError('m@', `Attribute Email is not valid Email: 'm@'.`)
+    testError('@m', `Attribute Email is not valid Email: '@m'.`)
+    testError('@m.cz', `Attribute Email is not valid Email: '@m.cz'.`)
   })
 })

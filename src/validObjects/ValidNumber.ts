@@ -1,13 +1,9 @@
-import { InvalidNumberError } from '@/errors/InvalidNumberError'
-import { ValidObjectLogicError } from '@/errors/ValidObjectLogicError'
-
-// tslint:disable-next-line:no-any
-const validate = (val: any): number => {
+const validate = (val: unknown, name: string): number => {
   if (typeof val !== 'number') {
-    throw new InvalidNumberError(typeof val === 'string' ? val.toString() : '')
+    throw new Error(`Attribute ${name} is not number.`)
   }
   if (val !== parseInt(val.toString(), 10)) {
-    throw new InvalidNumberError(val.toString())
+    throw new Error(`Attribute ${name} is not number: '${val}'.`)
   }
 
   return val
@@ -17,22 +13,22 @@ export class ValidNumber {
   private readonly val: number
 
   // tslint:disable-next-line:no-any
-  constructor(val: any, rangeFromInclusive?: number, rangeToInclusive?: number) {
+  constructor(val: unknown, name: string = 'Number', rangeFromInclusive?: number, rangeToInclusive?: number) {
     if (rangeFromInclusive !== undefined && rangeToInclusive !== undefined && rangeFromInclusive > rangeToInclusive) {
-      throw new ValidObjectLogicError(
-        `Parameter rangeFromInclusive (${rangeFromInclusive}) can not be bigger then rangeToInclusive (${rangeToInclusive})`
+      throw new Error(
+        `Attribute ${name} rangeFromInclusive (${rangeFromInclusive}) can not be bigger then rangeToInclusive (${rangeToInclusive}).`
       )
     }
-    this.val = validate(val)
-    if (rangeFromInclusive && this.value < rangeFromInclusive) {
-      throw new InvalidNumberError(`Number (${this.value}) can not be smaller than ${rangeFromInclusive}`)
+    this.val = validate(val, name)
+    if (rangeFromInclusive && this.getNumber() < rangeFromInclusive) {
+      throw new Error(`Attribute ${name} can not be smaller than ${rangeFromInclusive}: ${this.getNumber()}.`)
     }
-    if (rangeToInclusive && this.value > rangeToInclusive) {
-      throw new InvalidNumberError(`Number (${this.value}) can not be bigger than ${rangeToInclusive}`)
+    if (rangeToInclusive && this.getNumber() > rangeToInclusive) {
+      throw new Error(`Attribute ${name} can not be bigger than ${rangeToInclusive}: ${this.getNumber()}.`)
     }
   }
 
-  get value(): number {
+  public getNumber(): number {
     return this.val
   }
 

@@ -1,18 +1,9 @@
-import { InvalidPriceError } from '@/errors/InvalidPriceError'
-import { PriceOperationWithDifferentCurrencyError } from '@/errors/PriceOperationWithDifferentCurrencyError'
-import { ValidObjectError } from '@/errors/ValidObjectError'
 import { ValidNotEmptyString } from '@/validObjects/ValidNotEmptyString'
 import { ValidNumber } from '@/validObjects/ValidNumber'
 import * as formatter from 'number-format.js'
 import * as numeral from 'numeral'
 
 const inputRegexp = new RegExp(/^(.)*\s([A-Z]{3})$/)
-
-const validate = (val: string): void => {
-  if (!inputRegexp.test(val)) {
-    throw new ValidObjectError(val)
-  }
-}
 
 export class ValidPrice extends ValidNotEmptyString {
   private readonly amm: ValidNumber
@@ -26,19 +17,14 @@ export class ValidPrice extends ValidNotEmptyString {
    *
    * Decimal numbers are not supported
    */
-  constructor(val: unknown) {
-    try {
-      super(val)
-      validate(this.value)
-
-      this.amm = new ValidNumber(numeral(this.value.substring(0, this.value.length - 4)).value())
-      this.curr = new ValidNotEmptyString(this.value.slice(-3))
-    } catch (err) {
-      if (!(err instanceof ValidObjectError)) {
-        throw err
-      }
-      throw new InvalidPriceError(err.message)
+  constructor(val: unknown, name: string = 'Price') {
+    super(val, name)
+    if (!inputRegexp.test(this.getString())) {
+      throw new Error(`Attribute ${name} is not valid price: '${this.getString()}'.`)
     }
+
+    this.amm = new ValidNumber(numeral(this.getString().substring(0, this.getString().length - 4)).value(), name)
+    this.curr = new ValidNotEmptyString(this.getString().slice(-3), name)
   }
 
   get currency(): string {
@@ -46,7 +32,7 @@ export class ValidPrice extends ValidNotEmptyString {
   }
 
   get amount(): number {
-    return this.amm.value
+    return this.amm.getNumber()
   }
 
   public subtract(price: ValidPrice): ValidPrice {
@@ -93,7 +79,7 @@ export class ValidPrice extends ValidNotEmptyString {
 
   private checkCurrency(price: ValidPrice): void {
     if (this.currency !== price.currency) {
-      throw new PriceOperationWithDifferentCurrencyError(this.toString(), price.toString())
+      throw new Error(`Price operation with different currency '${this.toString()}' and ${price.toString()}.`)
     }
   }
 }

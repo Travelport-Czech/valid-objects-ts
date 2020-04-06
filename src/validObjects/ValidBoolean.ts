@@ -1,21 +1,15 @@
-import { InvalidBooleanError } from '@/errors/InvalidBooleanError'
-
-const validate = (val: unknown): boolean => {
-  if (typeof val !== 'boolean') {
-    throw new InvalidBooleanError(JSON.stringify(val) + ' is type ' + typeof val)
-  }
-
-  return val
-}
-
 export class ValidBoolean {
   private readonly val: boolean
 
-  constructor(val: unknown) {
-    this.val = validate(val)
+  constructor(val: unknown, name: string = 'Boolean') {
+    if (typeof val !== 'boolean') {
+      throw new Error(`Attribute ${name} is not valid Boolean.`)
+    }
+
+    this.val = val
   }
 
-  get value(): boolean {
+  public getBoolean(): boolean {
     return this.val
   }
 

@@ -1,5 +1,3 @@
-import { InvalidEmailError } from '@/errors/InvalidEmailError'
-import { ValidObjectError } from '@/errors/ValidObjectError'
 import { ValidNotEmptyString } from '@/validObjects/ValidNotEmptyString'
 import { validate } from 'email-validator'
 
@@ -34,18 +32,11 @@ export const validateEmail = (email: string | undefined, excludeChars?: string[]
 
 export class ValidEmail extends ValidNotEmptyString {
   // tslint:disable-next-line:no-any
-  constructor(val: any, excludeChars?: string[]) {
-    try {
-      super(val)
-    } catch (err) {
-      if (!(err instanceof ValidObjectError)) {
-        throw err
-      }
-      throw new InvalidEmailError(err.message)
-    }
+  constructor(val: unknown, name: string = 'Email', excludeChars?: string[]) {
+    super(val, name)
 
-    if (!validateEmail(this.value, excludeChars)) {
-      throw new InvalidEmailError(this.value)
+    if (!validateEmail(this.getString(), excludeChars)) {
+      throw new Error(`Attribute ${name} is not valid Email: '${this.getString()}'.`)
     }
   }
 }

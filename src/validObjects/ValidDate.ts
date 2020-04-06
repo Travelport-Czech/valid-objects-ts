@@ -1,69 +1,63 @@
-import { InvalidDateError } from '@/errors/InvalidDateError'
 import { dateRegexps, formatSystemDate } from '@/validObjects/consts'
+import { ValidNotEmptyString } from '@/validObjects/ValidNotEmptyString'
 import * as dayjs from 'dayjs'
 
-const validate = (val: unknown, format: 'YYYY-MM-DD' | 'YYYYMMDD'): dayjs.Dayjs => {
-  if (typeof val !== 'string') {
-    throw new InvalidDateError(JSON.stringify(val))
-  }
-  if (!val) {
-    throw new InvalidDateError(val)
-  }
+const validate = (val: string, name: string, format: 'YYYY-MM-DD' | 'YYYYMMDD'): dayjs.Dayjs => {
   const result = val.match(dateRegexps[format])
   if (!result) {
-    throw new InvalidDateError(val)
+    throw new Error(`Attribute ${name} is not valid Date: '${val}'.`)
   }
 
   const date = dayjs(val, formatSystemDate)
   if (!date.isValid()) {
-    throw new InvalidDateError(val)
+    throw new Error(`Attribute ${name} is not valid Date: '${val}'.`)
   }
 
   return date
 }
 
-export class ValidDate {
-  private readonly val: dayjs.Dayjs
+export class ValidDate extends ValidNotEmptyString {
+  private readonly date: dayjs.Dayjs
 
-  // tslint:disable-next-line:no-any
-  constructor(val: unknown, format: 'YYYY-MM-DD' | 'YYYYMMDD' = formatSystemDate) {
-    this.val = validate(val, format)
+  constructor(val: unknown, name: string = 'Date', format: 'YYYY-MM-DD' | 'YYYYMMDD' = formatSystemDate) {
+    super(val, name)
+    this.date = validate(this.getString(), name, format)
   }
 
-  get value(): dayjs.Dayjs {
-    return this.val
+  public getDayjs(): dayjs.Dayjs {
+    return this.date
   }
 
   public readonly isBefore = (date: ValidDate): boolean => {
-    return this.val.isBefore(date.value)
+    return this.date.isBefore(date.getDayjs())
   }
 
   public readonly isAfter = (date: ValidDate): boolean => {
-    return this.val.isAfter(date.value)
+    return this.date.isAfter(date.getDayjs())
   }
 
   public readonly isSame = (date: ValidDate): boolean => {
-    return this.val.isSame(date.value)
+    return this.date.isSame(date.getDayjs())
   }
 
   public readonly subtractDays = (days: number): ValidDate => {
-    return new ValidDate(this.val.subtract(days, 'day').format(formatSystemDate))
+    return new ValidDate(this.date.subtract(days, 'day').format(formatSystemDate))
   }
 
   public readonly addDays = (days: number): ValidDate => {
-    return new ValidDate(this.val.add(days, 'day').format(formatSystemDate))
+    return new ValidDate(this.date.add(days, 'day').format(formatSystemDate))
   }
 
   public readonly diffInDays = (date: ValidDate): number => {
-    return this.val.diff(date.value, 'day')
+    return this.date.diff(date.getDayjs(), 'day')
   }
 
   public readonly formatToSystem = (): string => {
-    return this.val.format(formatSystemDate)
+    return this.date.format(formatSystemDate)
   }
 
   public readonly formatToLocal = (format: string): string => {
-    return this.val.format(format)
+    return this.date.format(format)
   }
 
   public toString() {

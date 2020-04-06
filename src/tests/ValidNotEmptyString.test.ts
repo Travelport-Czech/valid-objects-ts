@@ -8,6 +8,6 @@ describe('ValidNotEmptyString', () => {
   })
 
   it('should throw error if empty', () => {
-    expect(() => new ValidNotEmptyString('')).to.throw(`Invalid string 'String can not be empty.'.`)
+    expect(() => new ValidNotEmptyString('')).to.throw(`Attribute NotEmptyString can not be empty.`)
   })
 })

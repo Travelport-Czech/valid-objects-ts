@@ -8,7 +8,7 @@ describe('ValidDate', () => {
   })
 
   it('Construct YYYYMMDD', () => {
-    const date = new ValidDate('20181224', 'YYYYMMDD')
+    const date = new ValidDate('20181224', 'Date', 'YYYYMMDD')
     expect(date.toString()).to.equal('2018-12-24')
   })
 
