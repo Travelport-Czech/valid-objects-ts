@@ -1,6 +1,6 @@
 {
   "name": "@travelport-czech/valid-objects-ts",
-  "version": "4.0.4",
+  "version": "4.0.5",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
