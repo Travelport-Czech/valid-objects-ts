@@ -1,6 +1,6 @@
 {
   "name": "@travelport-czech/valid-objects-ts",
-  "version": "4.0.2",
+  "version": "4.0.3",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
   },
