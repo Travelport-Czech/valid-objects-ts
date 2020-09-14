@@ -2,9 +2,6 @@ const validate = (val: unknown, name: string): number => {
   if (typeof val !== 'number') {
     throw new Error(`Attribute ${name} is not number.`)
   }
-  if (val !== parseInt(val.toString(), 10)) {
-    throw new Error(`Attribute ${name} is not number: '${val}'.`)
-  }
 
   return val
 }

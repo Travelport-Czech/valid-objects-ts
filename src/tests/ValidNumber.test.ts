@@ -8,6 +8,7 @@ describe('ValidNumber', () => {
     expect(new ValidNumber(-1).getNumber()).to.equal(-1)
     expect(new ValidNumber(-1000000000).getNumber()).to.equal(-1000000000)
     expect(new ValidNumber(1000000000).getNumber()).to.equal(1000000000)
+    expect(new ValidNumber(1.23).getNumber()).to.equal(1.23)
   })
 
   it('Construct with range', () => {

@@ -1,8 +1,20 @@
-Valid object improving application data management and make them more safe.
+Valid object helps to convert unknown data to type safe data.
 
 ## Install
 ```
 npm install @travelport-czech/valid-objects-ts
+```
+
+## Usage
+
+```typescript
+import { createEmailFromUnknown, ValidEmail } from '@travelport-czech/valid-objects-ts' import { ValidEmail } from './ValidEmail'
+
+const unknownEmail: unknown = 'email@email.com'
+
+const email: string = createEmailFromUnknown(unknownEmail).toString()
+// or
+const email: ValidEmail = createEmailFromUnknown(unknownEmail)
 ```
 
 ## Version release workflow

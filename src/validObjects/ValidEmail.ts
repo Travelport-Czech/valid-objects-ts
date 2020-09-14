@@ -31,7 +31,6 @@ export const validateEmail = (email: string | undefined, excludeChars?: string[]
 }
 
 export class ValidEmail extends ValidNotEmptyString {
-  // tslint:disable-next-line:no-any
   constructor(val: unknown, name: string = 'Email', excludeChars?: string[]) {
     super(val, name)
 

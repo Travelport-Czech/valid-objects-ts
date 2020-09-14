@@ -12,3 +12,5 @@ export * from '@/validObjects/ValidIATALocation'
 export * from '@/validObjects/ValidIATALocationList'
 
 export * from '@/validObjects/consts'
+
+export * from '@/validObjects/validObjectFactory'
