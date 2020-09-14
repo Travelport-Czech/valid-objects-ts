@@ -37,9 +37,11 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-          registry-url: https://registry.npmjs.org/
+          registry-url: https://registry.npmjs.org
+          scope: '@travelport-czech'
+          always-auth: true
       - run: npm ci
       - name: Publish to NPM registry
-        run: cat .npmrc #npm publish --access public
+        run: npm publish --access public
         env:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
