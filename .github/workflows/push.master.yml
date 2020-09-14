@@ -22,7 +22,6 @@ jobs:
       - run: npm ci
       - run: npm run lint
       - run: npm test
-      - run: echo "//registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN" > .npmrc
       - run: cat .npmrc
       - name: Publish to NPM registry
         run: npm publish --access public
