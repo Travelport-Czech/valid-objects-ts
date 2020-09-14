@@ -1,6 +1,6 @@
 {
   "name": "@travelport-czech/valid-objects-ts",
-  "version": "4.0.28",
+  "version": "4.0.29",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
