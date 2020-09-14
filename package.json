@@ -1,9 +1,6 @@
 {
   "name": "@travelport-czech/valid-objects-ts",
   "version": "4.0.23",
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org"
-  },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
