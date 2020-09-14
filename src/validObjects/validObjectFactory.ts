@@ -13,7 +13,7 @@ import { ValidUrl } from '@/validObjects/ValidUrl'
 
 export const createBooleanFromUnknown = (
   val: unknown,
-  options: {
+  options?: {
     readonly name?: string
   }
 ): boolean => {
@@ -27,7 +27,7 @@ export const createBooleanFromUnknown = (
 
 export const createDateFromUnknown = (
   val: unknown,
-  options: {
+  options?: {
     readonly name?: string
   }
 ): ValidDate => {
@@ -41,7 +41,7 @@ export const createDateFromUnknown = (
 
 export const createDateTimeFromUnknown = (
   val: unknown,
-  options: {
+  options?: {
     readonly name?: string
   }
 ): ValidDateTime => {
@@ -55,7 +55,7 @@ export const createDateTimeFromUnknown = (
 
 export const createNotEmptyStringFromUnknown = (
   val: unknown,
-  options: {
+  options?: {
     readonly name?: string
   }
 ): ValidNotEmptyString => {
@@ -69,7 +69,7 @@ export const createNotEmptyStringFromUnknown = (
 
 export const createStringFromUnknown = (
   val: unknown,
-  options: {
+  options?: {
     readonly name?: string
   }
 ): string => {
@@ -83,7 +83,7 @@ export const createStringFromUnknown = (
 
 export const createNumberFromUnknown = (
   val: unknown,
-  options: {
+  options?: {
     readonly name?: string
     readonly rangeFromInclusive?: number
     readonly rangeToInclusive?: number
@@ -91,6 +91,8 @@ export const createNumberFromUnknown = (
 ): number => {
   const o = {
     name: 'UnknownNumber',
+    rangeFromInclusive: undefined,
+    rangeToInclusive: undefined,
     ...options
   }
 
@@ -99,7 +101,7 @@ export const createNumberFromUnknown = (
 
 export const createIntegerFromUnknown = (
   val: unknown,
-  options: {
+  options?: {
     readonly name?: string
     readonly rangeFromInclusive?: number
     readonly rangeToInclusive?: number
@@ -107,6 +109,8 @@ export const createIntegerFromUnknown = (
 ): ValidInteger => {
   const o = {
     name: 'UnknownInteger',
+    rangeFromInclusive: undefined,
+    rangeToInclusive: undefined,
     ...options
   }
 
@@ -115,7 +119,7 @@ export const createIntegerFromUnknown = (
 
 export const createPriceFromUnknown = (
   val: unknown,
-  options: {
+  options?: {
     readonly name?: string
   }
 ): ValidPrice => {
@@ -129,13 +133,14 @@ export const createPriceFromUnknown = (
 
 export const createEmailFromUnknown = (
   val: unknown,
-  options: {
+  options?: {
     readonly name?: string
     readonly excludeChars?: string[]
   }
 ): ValidEmail => {
   const o = {
     name: 'UnknownEmail',
+    excludeChars: [],
     ...options
   }
 
@@ -144,7 +149,7 @@ export const createEmailFromUnknown = (
 
 export const createIataLocationFromUnknown = (
   val: unknown,
-  options: {
+  options?: {
     readonly name?: string
   }
 ): ValidIATALocation => {
@@ -158,7 +163,7 @@ export const createIataLocationFromUnknown = (
 
 export const createIataLocationListFromUnknown = (
   val: unknown,
-  options: {
+  options?: {
     readonly name?: string
   }
 ): ValidIATALocationList => {
@@ -172,7 +177,7 @@ export const createIataLocationListFromUnknown = (
 
 export const createUrlFromUnknown = (
   val: unknown,
-  options: {
+  options?: {
     readonly name?: string
   }
 ): ValidUrl => {
