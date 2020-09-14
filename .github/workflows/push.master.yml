@@ -40,6 +40,6 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - run: npm ci
       - name: Publish to NPM registry
-        run: tree -L 4 #npm publish --access public
+        run: cat .npmrc #npm publish --access public
         env:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
