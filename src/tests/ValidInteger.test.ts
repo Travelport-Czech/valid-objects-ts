@@ -8,7 +8,7 @@ describe('ValidInteger', () => {
     expect(new ValidInteger(-1).getNumber()).to.equal(-1)
     expect(new ValidInteger(-1000000000).getNumber()).to.equal(-1000000000)
     expect(new ValidInteger(1000000000).getNumber()).to.equal(1000000000)
-    expect(() => new ValidInteger(1.23)).to.throw(`Attribute Integer is not number: '1.23'.`)
+    expect(() => new ValidInteger(1.23)).to.throw(`Attribute Integer is not integer: '1.23'.`)
   })
 
   it('Construct with range', () => {

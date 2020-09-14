@@ -15,13 +15,13 @@ jobs:
           node-version: 8
           registry-url: https://npm.pkg.github.com/
           scope: '@travelport-czech'
-      - run: npm ci
-      - run: npm run lint
-      - run: npm test
       - name: "Automated Version Bump"
         uses: "phips28/gh-action-bump-version@master"
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      - run: npm ci
+      - run: npm run lint
+      - run: npm test
       - name: Publish to GitHub registry
         run: npm publish
         env:
