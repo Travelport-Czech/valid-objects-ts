@@ -39,7 +39,6 @@ jobs:
           node-version: 12
           registry-url: https://registry.npmjs.org
           scope: '@travelport-czech'
-          always-auth: true
       - run: npm ci
       - name: Publish to NPM registry
         run: npm publish --access public
