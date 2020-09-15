@@ -7,10 +7,10 @@ import { ValidIATALocationList } from '@/validObjects/ValidIATALocationList'
 import { ValidInteger } from '@/validObjects/ValidInteger'
 import { ValidNotEmptyString } from '@/validObjects/ValidNotEmptyString'
 import { ValidNumber } from '@/validObjects/ValidNumber'
+import { ValidOneOfEnum } from '@/validObjects/ValidOneOfEnum'
 import { ValidPrice } from '@/validObjects/ValidPrice'
 import { ValidString } from '@/validObjects/ValidString'
 import { ValidUrl } from '@/validObjects/ValidUrl'
-import { ValidOneOfEnum } from '@/validObjects/ValidOneOfEnum'
 
 export const createBooleanFromUnknown = (
   val: unknown,
