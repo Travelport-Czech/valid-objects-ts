@@ -1,10 +1,10 @@
 import { expect } from 'chai'
-import { createArrayOf } from 'src'
+import { createArrayFromUnknown } from 'src'
 
 describe('validObjectFactory', () => {
-  it('createArrayOf', () => {
+  it('createArrayFromUnknown', () => {
     const unknownData: unknown = ['one', 'two']
-    const data = createArrayOf(unknownData)
+    const data = createArrayFromUnknown(unknownData)
 
     expect(data).to.equal(unknownData)
   })
