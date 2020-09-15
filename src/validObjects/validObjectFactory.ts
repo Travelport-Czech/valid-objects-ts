@@ -204,3 +204,15 @@ export const createOneOfEnum = <T>(
 
   return new ValidOneOfEnum(val, o.name, o.possibleValues).getValue()
 }
+
+export const createArrayOf = <T>(val: unknown, options?: { readonly name?: string }): unknown[] => {
+  const o = {
+    name: 'ArrayOf',
+    ...options
+  }
+  if (!Array.isArray(val)) {
+    throw new Error(`Attribute ${o.name} is array.`)
+  }
+
+  return val
+}
