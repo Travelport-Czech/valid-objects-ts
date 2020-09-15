@@ -10,6 +10,7 @@ import { ValidNumber } from '@/validObjects/ValidNumber'
 import { ValidPrice } from '@/validObjects/ValidPrice'
 import { ValidString } from '@/validObjects/ValidString'
 import { ValidUrl } from '@/validObjects/ValidUrl'
+import { ValidOneOfEnum } from '@/validObjects/ValidOneOfEnum'
 
 export const createBooleanFromUnknown = (
   val: unknown,
@@ -187,4 +188,19 @@ export const createUrlFromUnknown = (
   }
 
   return new ValidUrl(val, o.name)
+}
+
+export const createOneOfEnum = <T>(
+  val: unknown,
+  options: {
+    readonly name?: string
+    readonly possibleValues: T
+  }
+): T[keyof T] => {
+  const o = {
+    name: 'OneOfEnum',
+    ...options
+  }
+
+  return new ValidOneOfEnum(val, o.name, o.possibleValues).getValue()
 }
