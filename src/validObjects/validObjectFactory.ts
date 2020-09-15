@@ -205,7 +205,7 @@ export const createOneOfEnumFromUnknown = <T>(
   return new ValidOneOfEnum(val, o.name, o.possibleValues).getValue()
 }
 
-export const createArrayFromUnknown = (val: unknown, options?: { readonly name?: string }): unknown[] => {
+export const createArrayFromUnknown = <T>(val: T, options?: { readonly name?: string }): T[] => {
   const o = {
     name: 'ArrayOf',
     ...options
