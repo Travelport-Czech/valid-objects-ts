@@ -6,6 +6,7 @@ describe('validObjectFactory', () => {
     const unknownData: unknown = ['one', 'two']
     const data = createArrayFromUnknown(unknownData)
 
-    expect(data).to.equal(unknownData)
+    expect(data.success).to.equal(true, 'Result must be true')
+    expect(data.success && data.data).to.equal(unknownData)
   })
 })

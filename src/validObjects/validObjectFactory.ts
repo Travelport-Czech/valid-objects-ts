@@ -1,3 +1,4 @@
+import { FnResult, FnResultError } from '@/validObjects/FnResult'
 import { ValidBoolean } from '@/validObjects/ValidBoolean'
 import { ValidDate } from '@/validObjects/ValidDate'
 import { ValidDateTime } from '@/validObjects/ValidDateTime'
@@ -12,18 +13,35 @@ import { ValidPrice } from '@/validObjects/ValidPrice'
 import { ValidString } from '@/validObjects/ValidString'
 import { ValidUrl } from '@/validObjects/ValidUrl'
 
+const resolveError = (e: unknown): FnResultError => {
+  if (e instanceof Error) {
+    return {
+      success: false,
+      error: e.message
+    }
+  }
+  throw e
+}
+
 export const createBooleanFromUnknown = (
   val: unknown,
   options?: {
     readonly name?: string
   }
-): boolean => {
+): FnResult<boolean> => {
   const o = {
     name: 'UnknownBoolean',
     ...options
   }
 
-  return new ValidBoolean(val, o.name).getBoolean()
+  try {
+    return {
+      success: true,
+      data: new ValidBoolean(val, o.name).getBoolean()
+    }
+  } catch (e) {
+    return resolveError(e)
+  }
 }
 
 export const createDateFromUnknown = (
@@ -31,13 +49,20 @@ export const createDateFromUnknown = (
   options?: {
     readonly name?: string
   }
-): ValidDate => {
+): FnResult<ValidDate> => {
   const o = {
     name: 'UnknownDate',
     ...options
   }
 
-  return new ValidDate(val, o.name)
+  try {
+    return {
+      success: true,
+      data: new ValidDate(val, o.name)
+    }
+  } catch (e) {
+    return resolveError(e)
+  }
 }
 
 export const createDateTimeFromUnknown = (
@@ -45,13 +70,20 @@ export const createDateTimeFromUnknown = (
   options?: {
     readonly name?: string
   }
-): ValidDateTime => {
+): FnResult<ValidDateTime> => {
   const o = {
     name: 'UnknownDateTime',
     ...options
   }
 
-  return new ValidDateTime(val, o.name)
+  try {
+    return {
+      success: true,
+      data: new ValidDateTime(val, o.name)
+    }
+  } catch (e) {
+    return resolveError(e)
+  }
 }
 
 export const createNotEmptyStringFromUnknown = (
@@ -59,13 +91,20 @@ export const createNotEmptyStringFromUnknown = (
   options?: {
     readonly name?: string
   }
-): ValidNotEmptyString => {
+): FnResult<ValidNotEmptyString> => {
   const o = {
     name: 'UnknownNotEmptyString',
     ...options
   }
 
-  return new ValidNotEmptyString(val, o.name)
+  try {
+    return {
+      success: true,
+      data: new ValidNotEmptyString(val, o.name)
+    }
+  } catch (e) {
+    return resolveError(e)
+  }
 }
 
 export const createStringFromUnknown = (
@@ -73,13 +112,20 @@ export const createStringFromUnknown = (
   options?: {
     readonly name?: string
   }
-): string => {
+): FnResult<string> => {
   const o = {
     name: 'UnknownString',
     ...options
   }
 
-  return new ValidString(val, o.name).toString()
+  try {
+    return {
+      success: true,
+      data: new ValidString(val, o.name).getString()
+    }
+  } catch (e) {
+    return resolveError(e)
+  }
 }
 
 export const createNumberFromUnknown = (
@@ -89,7 +135,7 @@ export const createNumberFromUnknown = (
     readonly rangeFromInclusive?: number
     readonly rangeToInclusive?: number
   }
-): number => {
+): FnResult<number> => {
   const o = {
     name: 'UnknownNumber',
     rangeFromInclusive: undefined,
@@ -97,7 +143,14 @@ export const createNumberFromUnknown = (
     ...options
   }
 
-  return new ValidNumber(val, o.name, o.rangeFromInclusive, o.rangeToInclusive).getNumber()
+  try {
+    return {
+      success: true,
+      data: new ValidNumber(val, o.name, o.rangeFromInclusive, o.rangeToInclusive).getNumber()
+    }
+  } catch (e) {
+    return resolveError(e)
+  }
 }
 
 export const createIntegerFromUnknown = (
@@ -107,7 +160,7 @@ export const createIntegerFromUnknown = (
     readonly rangeFromInclusive?: number
     readonly rangeToInclusive?: number
   }
-): ValidInteger => {
+): FnResult<ValidInteger> => {
   const o = {
     name: 'UnknownInteger',
     rangeFromInclusive: undefined,
@@ -115,7 +168,14 @@ export const createIntegerFromUnknown = (
     ...options
   }
 
-  return new ValidInteger(val, o.name, o.rangeFromInclusive, o.rangeToInclusive)
+  try {
+    return {
+      success: true,
+      data: new ValidInteger(val, o.name, o.rangeFromInclusive, o.rangeToInclusive)
+    }
+  } catch (e) {
+    return resolveError(e)
+  }
 }
 
 export const createPriceFromUnknown = (
@@ -123,13 +183,20 @@ export const createPriceFromUnknown = (
   options?: {
     readonly name?: string
   }
-): ValidPrice => {
+): FnResult<ValidPrice> => {
   const o = {
     name: 'UnknownPrice',
     ...options
   }
 
-  return new ValidPrice(val, o.name)
+  try {
+    return {
+      success: true,
+      data: new ValidPrice(val, o.name)
+    }
+  } catch (e) {
+    return resolveError(e)
+  }
 }
 
 export const createEmailFromUnknown = (
@@ -138,14 +205,21 @@ export const createEmailFromUnknown = (
     readonly name?: string
     readonly excludeChars?: string[]
   }
-): ValidEmail => {
+): FnResult<ValidEmail> => {
   const o = {
     name: 'UnknownEmail',
     excludeChars: [],
     ...options
   }
 
-  return new ValidEmail(val, o.name, o.excludeChars)
+  try {
+    return {
+      success: true,
+      data: new ValidEmail(val, o.name, o.excludeChars)
+    }
+  } catch (e) {
+    return resolveError(e)
+  }
 }
 
 export const createIataLocationFromUnknown = (
@@ -153,13 +227,20 @@ export const createIataLocationFromUnknown = (
   options?: {
     readonly name?: string
   }
-): ValidIATALocation => {
+): FnResult<ValidIATALocation> => {
   const o = {
     name: 'UnknownIataLocation',
     ...options
   }
 
-  return new ValidIATALocation(val, o.name)
+  try {
+    return {
+      success: true,
+      data: new ValidIATALocation(val, o.name)
+    }
+  } catch (e) {
+    return resolveError(e)
+  }
 }
 
 export const createIataLocationListFromUnknown = (
@@ -167,13 +248,20 @@ export const createIataLocationListFromUnknown = (
   options?: {
     readonly name?: string
   }
-): ValidIATALocationList => {
+): FnResult<ValidIATALocationList> => {
   const o = {
     name: 'UnknownIataLocationList',
     ...options
   }
 
-  return new ValidIATALocationList(val, o.name)
+  try {
+    return {
+      success: true,
+      data: new ValidIATALocationList(val, o.name)
+    }
+  } catch (e) {
+    return resolveError(e)
+  }
 }
 
 export const createUrlFromUnknown = (
@@ -181,13 +269,20 @@ export const createUrlFromUnknown = (
   options?: {
     readonly name?: string
   }
-): ValidUrl => {
+): FnResult<ValidUrl> => {
   const o = {
     name: 'UnknownUrl',
     ...options
   }
 
-  return new ValidUrl(val, o.name)
+  try {
+    return {
+      success: true,
+      data: new ValidUrl(val, o.name)
+    }
+  } catch (e) {
+    return resolveError(e)
+  }
 }
 
 export const createOneOfEnumFromUnknown = <T>(
@@ -196,23 +291,36 @@ export const createOneOfEnumFromUnknown = <T>(
     readonly name?: string
     readonly possibleValues: T
   }
-): T[keyof T] => {
+): FnResult<T[keyof T]> => {
   const o = {
     name: 'OneOfEnum',
     ...options
   }
 
-  return new ValidOneOfEnum(val, o.name, o.possibleValues).getValue()
+  try {
+    return {
+      success: true,
+      data: new ValidOneOfEnum(val, o.name, o.possibleValues).getValue()
+    }
+  } catch (e) {
+    return resolveError(e)
+  }
 }
 
-export const createArrayFromUnknown = <T>(val: T, options?: { readonly name?: string }): T & unknown[] => {
+export const createArrayFromUnknown = <T>(val: T, options?: { readonly name?: string }): FnResult<T & unknown[]> => {
   const o = {
     name: 'ArrayOf',
     ...options
   }
   if (!Array.isArray(val)) {
-    throw new Error(`Attribute ${o.name} is array.`)
+    return {
+      success: false,
+      error: `Attribute ${o.name} is array.`
+    }
   }
 
-  return val
+  return {
+    success: true,
+    data: val
+  }
 }
