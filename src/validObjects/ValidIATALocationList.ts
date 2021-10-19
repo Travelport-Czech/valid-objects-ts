@@ -1,20 +1,24 @@
-import { iataLocationsRegexp } from '@/validObjects/consts'
+import { iataLocationsRegexp, iataLocationsRegexpWithPlus } from '@/validObjects/consts'
 import { ValidIATALocation } from '@/validObjects/ValidIATALocation'
 import { ValidNotEmptyString } from '@/validObjects/ValidNotEmptyString'
 
 export class ValidIATALocationList extends ValidNotEmptyString {
   private readonly locationCodes: ValidIATALocation[]
 
-  constructor(val: unknown, name: string = 'IATALocationList') {
+  constructor(val: unknown, name: string = 'IATALocationList', allowPlus: boolean = false) {
     super(val, name)
-    if (!iataLocationsRegexp.test(this.getString())) {
+    if (!allowPlus && !iataLocationsRegexp.test(this.getString())) {
+      throw new Error(`Attribute ${name} is not valid IATALocationList: '${this.getString()}'.`)
+    }
+
+    if (allowPlus && !iataLocationsRegexpWithPlus.test(this.getString())) {
       throw new Error(`Attribute ${name} is not valid IATALocationList: '${this.getString()}'.`)
     }
 
     this.locationCodes = this.getString()
       .split('/')
       .map((code: string) => {
-        return new ValidIATALocation(code)
+        return new ValidIATALocation(code, 'IATALocation', allowPlus)
       })
   }
 

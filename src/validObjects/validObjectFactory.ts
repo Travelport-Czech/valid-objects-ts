@@ -226,17 +226,19 @@ export const createIataLocationFromUnknown = (
   val: unknown,
   options?: {
     readonly name?: string
+    readonly allowPlus?: boolean
   }
 ): FnResult<ValidIATALocation> => {
   const o = {
     name: 'UnknownIataLocation',
+    allowPlus: false,
     ...options
   }
 
   try {
     return {
       success: true,
-      data: new ValidIATALocation(val, o.name)
+      data: new ValidIATALocation(val, o.name, o.allowPlus)
     }
   } catch (e) {
     return resolveError(e)
@@ -247,17 +249,19 @@ export const createIataLocationListFromUnknown = (
   val: unknown,
   options?: {
     readonly name?: string
+    readonly allowPlus?: boolean
   }
 ): FnResult<ValidIATALocationList> => {
   const o = {
     name: 'UnknownIataLocationList',
+    allowPlus: false,
     ...options
   }
 
   try {
     return {
       success: true,
-      data: new ValidIATALocationList(val, o.name)
+      data: new ValidIATALocationList(val, o.name, o.allowPlus)
     }
   } catch (e) {
     return resolveError(e)

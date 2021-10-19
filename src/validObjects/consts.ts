@@ -1,4 +1,5 @@
 export const iataLocationsRegexp = new RegExp(/^[A-Z]{3}(\/[A-Z]{3})*$/)
+export const iataLocationsRegexpWithPlus = new RegExp(/^[A-Z]{3}\+?(\/[A-Z]{3}\+?)*$/)
 export const dateRegexps = {
   'YYYY-MM-DD': new RegExp(/^([0-9]{4})-([0-9]{2})-([0-9]{2})$/),
   YYYYMMDD: new RegExp(/^([0-9]{4})([0-9]{2})([0-9]{2})$/)
