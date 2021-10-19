@@ -14,4 +14,8 @@ export class ValidIATALocation extends ValidNotEmptyString {
       throw new Error(`Attribute ${name} is not valid IATALocation: '${this.getString()}'.`)
     }
   }
+
+  public toStringWithoutPlus(): string {
+    return this.getString().substring(0, 3)
+  }
 }

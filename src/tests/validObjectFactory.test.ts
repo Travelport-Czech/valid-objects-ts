@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import { createArrayFromUnknown, createIataLocationListFromUnknown } from 'src'
+import { createArrayFromUnknown, createIataLocationFromUnknown, createIataLocationListFromUnknown } from 'src'
 
 describe('validObjectFactory', () => {
   it('createArrayFromUnknown', () => {
@@ -32,5 +32,21 @@ describe('validObjectFactory', () => {
 
     expect(data.success).to.equal(true, 'Result must be true')
     expect(data.success && data.data.toString()).to.equal(unknownData)
+  })
+
+  it('createIataLocationListFromUnknown with plus enabled', () => {
+    const unknownData: unknown = 'LON'
+    const data = createIataLocationListFromUnknown(unknownData, { allowPlus: true })
+
+    expect(data.success).to.equal(true, 'Result must be true')
+    expect(data.success && data.data.toString()).to.equal(unknownData)
+  })
+
+  it('createIataLocationFromUnknown with plus toStringWithoutPlus', () => {
+    const unknownData: unknown = 'PRG+'
+    const data = createIataLocationFromUnknown(unknownData, { allowPlus: true })
+
+    expect(data.success).to.equal(true, 'Result must be true')
+    expect(data.success && data.data.toStringWithoutPlus()).to.equal('PRG')
   })
 })
