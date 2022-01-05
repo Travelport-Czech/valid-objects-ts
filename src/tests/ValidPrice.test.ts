@@ -39,6 +39,7 @@ describe('ValidPrice', () => {
     test('£1,000 CZK', 1000, 'CZK', '1 000 CZK')
 
     test('11 080 ETB', 11080, 'ETB', '11 080 ETB')
+    test('11 080 Kč', 11080, 'Kč', '11 080 Kč')
 
     testError('', `Attribute Price can not be empty.`)
     testError('CZK', `Attribute Price is not valid price: 'CZK'.`)

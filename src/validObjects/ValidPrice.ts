@@ -3,7 +3,7 @@ import { ValidNumber } from '@/validObjects/ValidNumber'
 import * as formatter from 'number-format.js'
 import * as numeral from 'numeral'
 
-const inputRegexp = new RegExp(/^(.)*\s([A-Z]{3})$/)
+const inputRegexp = new RegExp(/^(.)*\s([a-zA-Zá-ŽÁ-Ž]{2,3})$/)
 
 export class ValidPrice extends ValidNotEmptyString {
   private readonly amm: ValidNumber
@@ -13,7 +13,7 @@ export class ValidPrice extends ValidNotEmptyString {
    * Value must contain:
    * 1. number (can be formatted with currency symbol)
    * 2. space
-   * 3. currency code (three chars)
+   * 3. currency code (two or three chars)
    *
    * Decimal numbers are not supported
    */
@@ -23,8 +23,13 @@ export class ValidPrice extends ValidNotEmptyString {
       throw new Error(`Attribute ${name} is not valid price: '${this.getString()}'.`)
     }
 
-    this.amm = new ValidNumber(numeral(this.getString().substring(0, this.getString().length - 4)).value(), name)
-    this.curr = new ValidNotEmptyString(this.getString().slice(-3), name)
+    const splited = this.getString().split(' ')
+
+    this.curr = new ValidNotEmptyString(splited[splited.length - 1])
+    this.amm = new ValidNumber(
+      numeral(this.getString().substring(0, this.getString().length - this.curr.getString().length)).value(),
+      name
+    )
   }
 
   get currency(): string {
