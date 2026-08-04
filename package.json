@@ -33,7 +33,7 @@
     "@types/chai": "^4.1.7",
     "@types/mocha": "^5.2.6",
     "chai": "^4.2.0",
-    "gulp": "^4.0.2",
+    "gulp": "^5.0.1",
     "mocha": "^6.2.3",
     "path-alias-resolver": "git+https://github.com/Travelport-Czech/path-alias-resolver.git#v1.0.5",
     "prettier": "1.16.4",
