@@ -17,16 +17,15 @@ const email: string = createEmailFromUnknown(unknownEmail).toString()
 const email: ValidEmail = createEmailFromUnknown(unknownEmail)
 ```
 
-## Version release workflow
+## Release workflow
 
-Version is automatically changed if the master branch is changed
+Releases are published manually from the `Publish` GitHub Actions workflow.
+Before running it:
 
-* Based on the commit messages, increment the version from the lastest release.
-If the string "BREAKING CHANGE" is found anywhere in any of the commit messages or descriptions the major version will be incremented.
-* If a commit message begins with the string "feat" then the minor version will be increased. This works for most common commit metadata for feature additions: "feat: new API" and "feature: new API".
-* All other changes will increment the patch version.
+1. Update the version in `package.json` and `package-lock.json` on `master`.
+2. Create the matching Git tag after the version change is merged.
+3. Run the `Publish` workflow from `master` and enter that tag.
 
-## Publish
-```
-npm publish --access public
-```
+The workflow verifies the package before publishing it to npm and GitHub
+Packages. npm publishing requires the `NPM_AUTH_TOKEN` repository secret to
+have publish access to the `@travelport-czech` scope.
