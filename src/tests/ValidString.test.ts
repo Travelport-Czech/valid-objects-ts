@@ -1,4 +1,4 @@
-import { ValidString } from 'src/validObjects/ValidString'
+import { ValidString } from '../validObjects/ValidString'
 import { expect } from 'chai'
 
 describe('ValidString', () => {

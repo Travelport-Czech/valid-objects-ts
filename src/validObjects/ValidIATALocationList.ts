@@ -1,6 +1,6 @@
-import { iataLocationsRegexp, iataLocationsRegexpWithPlus } from '@/validObjects/consts'
-import { ValidIATALocation } from '@/validObjects/ValidIATALocation'
-import { ValidNotEmptyString } from '@/validObjects/ValidNotEmptyString'
+import { iataLocationsRegexp, iataLocationsRegexpWithPlus } from './consts'
+import { ValidIATALocation } from './ValidIATALocation'
+import { ValidNotEmptyString } from './ValidNotEmptyString'
 
 export class ValidIATALocationList extends ValidNotEmptyString {
   private readonly locationCodes: ValidIATALocation[]

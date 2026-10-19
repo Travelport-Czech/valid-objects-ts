@@ -1,4 +1,4 @@
-import { ValidEmail } from 'src/validObjects/ValidEmail'
+import { ValidEmail } from '../validObjects/ValidEmail'
 import { expect } from 'chai'
 
 describe('ValidEmail', () => {

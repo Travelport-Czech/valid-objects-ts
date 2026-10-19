@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import { createArrayFromUnknown, createIataLocationFromUnknown, createIataLocationListFromUnknown } from 'src'
+import { createArrayFromUnknown, createIataLocationFromUnknown, createIataLocationListFromUnknown } from '..'
 
 describe('validObjectFactory', () => {
   it('createArrayFromUnknown', () => {

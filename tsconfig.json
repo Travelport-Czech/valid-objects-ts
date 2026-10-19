@@ -8,10 +8,6 @@
     "rootDirs": [
       "./src"
     ],
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./src/*"]
-    },
     "pretty": true,
     "declaration": true,
     "noImplicitAny": true,

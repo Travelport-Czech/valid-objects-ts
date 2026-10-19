@@ -1,4 +1,4 @@
-import { ValidNumber } from '@/validObjects/ValidNumber'
+import { ValidNumber } from './ValidNumber'
 
 export class ValidInteger extends ValidNumber {
   constructor(val: unknown, name: string = 'Integer', rangeFromInclusive?: number, rangeToInclusive?: number) {

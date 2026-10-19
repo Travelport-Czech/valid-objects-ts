@@ -1,5 +1,6 @@
-import { ValidNotEmptyString } from '@/validObjects/ValidNotEmptyString'
-import { ValidNumber } from '@/validObjects/ValidNumber'
+import { ValidNotEmptyString } from './ValidNotEmptyString'
+import { ValidNumber } from './ValidNumber'
+
 import * as formatter from 'number-format.js'
 import * as numeral from 'numeral'
 
