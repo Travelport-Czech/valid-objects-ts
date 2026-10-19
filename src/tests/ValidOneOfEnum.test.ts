@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import { ValidOneOfEnum } from 'src/validObjects/ValidOneOfEnum'
+import { ValidOneOfEnum } from '../validObjects/ValidOneOfEnum'
 
 describe('ValidOneOfEnum', () => {
   it('is in enum', () => {

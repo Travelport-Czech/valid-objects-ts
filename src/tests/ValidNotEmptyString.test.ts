@@ -1,4 +1,4 @@
-import { ValidNotEmptyString } from 'src/validObjects/ValidNotEmptyString'
+import { ValidNotEmptyString } from '../validObjects/ValidNotEmptyString'
 import { expect } from 'chai'
 
 describe('ValidNotEmptyString', () => {

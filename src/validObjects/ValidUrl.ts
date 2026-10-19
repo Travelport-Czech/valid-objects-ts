@@ -1,4 +1,5 @@
-import { ValidNotEmptyString } from '@/validObjects/ValidNotEmptyString'
+import { ValidNotEmptyString } from './ValidNotEmptyString'
+
 import { isWebUri } from 'valid-url'
 
 export class ValidUrl extends ValidNotEmptyString {

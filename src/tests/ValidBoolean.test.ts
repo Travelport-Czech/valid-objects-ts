@@ -1,4 +1,4 @@
-import { ValidBoolean } from 'src'
+import { ValidBoolean } from '..'
 import { expect } from 'chai'
 
 describe('ValidBoolean', () => {

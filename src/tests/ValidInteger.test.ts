@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import { ValidInteger } from 'src/validObjects/ValidInteger'
+import { ValidInteger } from '../validObjects/ValidInteger'
 
 describe('ValidInteger', () => {
   it('Construct default', () => {

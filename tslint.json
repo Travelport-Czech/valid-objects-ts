@@ -11,6 +11,7 @@
   ],
   "jsRules": {},
   "rules": {
+    "no-relative-imports": [true, "allow-siblings"],
     "no-implicit-dependencies": [true, "dev", ["@"]],
     "no-submodule-imports": [true, "@", "moment"],
     "typedef": [false, "variable-declaration"], // Typedef enforcement for variables that contain a function => duplicate function declaration

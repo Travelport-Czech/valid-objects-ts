@@ -1,4 +1,4 @@
-import { ValidNotEmptyString } from '@/validObjects/ValidNotEmptyString'
+import { ValidNotEmptyString } from './ValidNotEmptyString'
 
 export class ValidLanguage extends ValidNotEmptyString {
   constructor(val: unknown, name: string = 'Language', supportedLanguages: string[]) {

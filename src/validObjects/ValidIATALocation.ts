@@ -1,4 +1,4 @@
-import { ValidNotEmptyString } from '@/validObjects/ValidNotEmptyString'
+import { ValidNotEmptyString } from './ValidNotEmptyString'
 
 const inputRegexp = new RegExp(/^[A-Z]{3}$/)
 const inputRegexpWithPlus = new RegExp(/^[A-Z]{3}\+?$/)

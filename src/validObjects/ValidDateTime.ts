@@ -1,6 +1,7 @@
-import { dateTimeRegexp, formatSystemDateTime } from '@/validObjects/consts'
-import { ValidDate } from '@/validObjects/ValidDate'
-import { ValidNotEmptyString } from '@/validObjects/ValidNotEmptyString'
+import { dateTimeRegexp, formatSystemDateTime } from './consts'
+import { ValidDate } from './ValidDate'
+import { ValidNotEmptyString } from './ValidNotEmptyString'
+
 import * as dayjs from 'dayjs'
 
 const validate = (val: string, name: string): dayjs.Dayjs => {

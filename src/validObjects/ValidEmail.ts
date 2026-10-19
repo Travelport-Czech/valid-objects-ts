@@ -1,4 +1,5 @@
-import { ValidNotEmptyString } from '@/validObjects/ValidNotEmptyString'
+import { ValidNotEmptyString } from './ValidNotEmptyString'
+
 import { validate } from 'email-validator'
 
 export const validateEmail = (email: string | undefined, excludeChars?: string[]): boolean => {
